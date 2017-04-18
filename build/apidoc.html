@@ -1,0 +1,428 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/tegon/clone-org-repos"
+
+    >clone-org-repos (v0.2.5)</a>
+</h1>
+<h4>Clones a github organization repositories</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.clone-org-repos">module clone-org-repos</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">clone-org-repos.</span>github</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">clone-org-repos.</span>options_validator</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.clone-org-repos.github">module clone-org-repos.github</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.clone-org-repos.github.Organization">
+            function <span class="apidocSignatureSpan">clone-org-repos.github.</span>Organization
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.clone-org-repos.options_validator">module clone-org-repos.options_validator</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.clone-org-repos.options_validator.execute">
+            function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>execute
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.clone-org-repos.options_validator.validateExcludeAndOnly">
+            function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validateExcludeAndOnly
+            <span class="apidocSignatureSpan">(exclude, only)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.clone-org-repos.options_validator.validatePassword">
+            function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validatePassword
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.clone-org-repos.options_validator.validatePerPage">
+            function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validatePerPage
+            <span class="apidocSignatureSpan">(perpage)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.clone-org-repos.options_validator.validateType">
+            function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validateType
+            <span class="apidocSignatureSpan">(type)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.clone-org-repos" id="apidoc.module.clone-org-repos">module clone-org-repos</a></h1>
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.clone-org-repos.github" id="apidoc.module.clone-org-repos.github">module clone-org-repos.github</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.clone-org-repos.github.Organization" id="apidoc.element.clone-org-repos.github.Organization">
+        function <span class="apidocSignatureSpan">clone-org-repos.github.</span>Organization
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Organization(options) {
+    this.BASE_URI = &#x27;https://api.github.com/orgs/&#x27;;
+    this.currentPage = 1;
+    this.organization = options.organization;
+    this.perpage = parseInt(options.perpage);
+    this.username = options.username;
+    this.password = options.password;
+    this.token = options.token;
+    this.regexp = options.regexp;
+    this.gitaccess = options.gitaccess;
+    this.gitsettings = options.gitsettings;
+
+    if (options.only &#x26;&#x26; options.regexp) {
+        this.only = new RegExp(options.only);
+    } else if (options.only) {
+        this.only = options.only.split(&#x27;,&#x27;);
+    }
+
+    if (options.exclude &#x26;&#x26; options.regexp) {
+        this.exclude = new RegExp(options.exclude);
+    } else if (options.exclude) {
+        this.exclude = options.exclude.split(&#x27;,&#x27;);
+    }
+
+    this.type = options.type;
+    this.nextPageUrl = this.getRequestUri();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+token: [&#x27;token&#x27;, &#x27;Token authentication. Required to access github api&#x27;, &#x27;string&#x27;],
+gitaccess: [&#x27;a&#x27;, &#x27;GitHub access protocol: git, ssh or https&#x27;, &#x27;string&#x27;, &#x27;ssh&#x27;],
+gitsettings: [&#x27;s&#x27;, &#x27;Additional git options to pass to git clone command&#x27;, &#x27;string&#x27;, &#x27;&#x27;]
+});
+
+getRepositories = function(args, options) {
+var gitOptions = merge(options, { organization: args[0] });
+var organization = new github.<span class="apidocCodeKeywordSpan">Organization</span>(gitOptions);
+
+var validatorResult = optionsValidator.execute(gitOptions);
+
+if (validatorResult.valid) {
+    var callback = function(err, success) {
+        if (err) {
+            cli.info(&#x27;error executing request &#x27;, err);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.clone-org-repos.options_validator" id="apidoc.module.clone-org-repos.options_validator">module clone-org-repos.options_validator</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.clone-org-repos.options_validator.execute" id="apidoc.element.clone-org-repos.options_validator.execute">
+        function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>execute
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">execute = function (options) {
+    result = {};
+    perPageResult = {};
+    typeResult = {};
+
+    if (options.perpage) {
+        perPageResult = this.validatePerPage(options.perpage);
+    }
+
+    if (options.type) {
+        typeResult = this.validateType(options.type);
+    }
+
+    excludeOnlyResult = this.validateExcludeAndOnly(options.exclude, options.only);
+
+    passwordResult = this.validatePassword(options);
+
+    result.valid = !!(perPageResult.valid &#x26;&#x26; typeResult.valid &#x26;&#x26; excludeOnlyResult.valid &#x26;&#x26; passwordResult.valid);
+    result.message = [perPageResult.message, typeResult.message, excludeOnlyResult.message, passwordResult.message].join(&#x27; &#x27;);
+
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+gitsettings: [&#x27;s&#x27;, &#x27;Additional git options to pass to git clone command&#x27;, &#x27;string&#x27;, &#x27;&#x27;]
+});
+
+getRepositories = function(args, options) {
+var gitOptions = merge(options, { organization: args[0] });
+var organization = new github.Organization(gitOptions);
+
+var validatorResult = optionsValidator.<span class="apidocCodeKeywordSpan">execute</span>(gitOptions);
+
+if (validatorResult.valid) {
+    var callback = function(err, success) {
+        if (err) {
+            cli.info(&#x27;error executing request &#x27;, err);
+        } else {
+            if (this.currentPage &#x3c;= this.getLastPage()) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.clone-org-repos.options_validator.validateExcludeAndOnly" id="apidoc.element.clone-org-repos.options_validator.validateExcludeAndOnly">
+        function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validateExcludeAndOnly
+        <span class="apidocSignatureSpan">(exclude, only)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">validateExcludeAndOnly = function (exclude, only) {
+    result = {};
+    result.valid = !!(exclude == null || only == null);
+
+    if (!result.valid) {
+        result.message = &#x27;Exclude and only options passed. Please pass just one of them.&#x27;;
+    }
+
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    perPageResult = this.validatePerPage(options.perpage);
+}
+
+if (options.type) {
+    typeResult = this.validateType(options.type);
+}
+
+excludeOnlyResult = this.<span class="apidocCodeKeywordSpan">validateExcludeAndOnly</span>(options.exclude, options.only);
+
+passwordResult = this.validatePassword(options);
+
+result.valid = !!(perPageResult.valid &#x26;&#x26; typeResult.valid &#x26;&#x26; excludeOnlyResult.valid &#x26;&#x26; passwordResult
+.valid);
+result.message = [perPageResult.message, typeResult.message, excludeOnlyResult.message, passwordResult.message].join(&#x27; &#x27
+;);
+
+return result;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.clone-org-repos.options_validator.validatePassword" id="apidoc.element.clone-org-repos.options_validator.validatePassword">
+        function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validatePassword
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">validatePassword = function (options) {
+    result = {};
+    result.valid = !!(options.token || options.password);
+
+    if (!result.valid) {
+        result.message = &#x27;Please provide an password&#x27;;
+    }
+
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    if (options.type) {
+        typeResult = this.validateType(options.type);
+    }
+
+    excludeOnlyResult = this.validateExcludeAndOnly(options.exclude, options.only);
+
+    passwordResult = this.<span class="apidocCodeKeywordSpan">validatePassword</span>(options);
+
+    result.valid = !!(perPageResult.valid &#x26;&#x26; typeResult.valid &#x26;&#x26; excludeOnlyResult.valid &#x26;&#x26; passwordResult
+.valid);
+    result.message = [perPageResult.message, typeResult.message, excludeOnlyResult.message, passwordResult.message].join(&#x27; &#
+x27;);
+
+    return result;
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.clone-org-repos.options_validator.validatePerPage" id="apidoc.element.clone-org-repos.options_validator.validatePerPage">
+        function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validatePerPage
+        <span class="apidocSignatureSpan">(perpage)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">validatePerPage = function (perpage) {
+    result = {};
+    result.valid = !isNaN(perpage);
+
+    if (!result.valid) {
+        result.message = perpage + &#x27; is not a number&#x27;;
+    }
+
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+optionsValidator.execute = function(options) {
+result = {};
+perPageResult = {};
+typeResult = {};
+
+if (options.perpage) {
+    perPageResult = this.<span class="apidocCodeKeywordSpan">validatePerPage</span>(options.perpage);
+}
+
+if (options.type) {
+    typeResult = this.validateType(options.type);
+}
+
+excludeOnlyResult = this.validateExcludeAndOnly(options.exclude, options.only);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.clone-org-repos.options_validator.validateType" id="apidoc.element.clone-org-repos.options_validator.validateType">
+        function <span class="apidocSignatureSpan">clone-org-repos.options_validator.</span>validateType
+        <span class="apidocSignatureSpan">(type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">validateType = function (type) {
+    validTypes = [&#x27;all&#x27;, &#x27;public&#x27;, &#x27;private&#x27;, &#x27;forks&#x27;, &#x27;sources&#x27;, &#x27;member&#x27;];
+    result = {};
+    result.valid = validTypes.indexOf(type) != -1;
+
+    if (!result.valid) {
+        result.message = type + &#x27; is not a valid type. Should be any of: &#x27; + validTypes.join(&#x27;, &#x27;);
+    }
+
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+typeResult = {};
+
+if (options.perpage) {
+    perPageResult = this.validatePerPage(options.perpage);
+}
+
+if (options.type) {
+    typeResult = this.<span class="apidocCodeKeywordSpan">validateType</span>(options.type);
+}
+
+excludeOnlyResult = this.validateExcludeAndOnly(options.exclude, options.only);
+
+passwordResult = this.validatePassword(options);
+
+result.valid = !!(perPageResult.valid &#x26;&#x26; typeResult.valid &#x26;&#x26; excludeOnlyResult.valid &#x26;&#x26; passwordResult
+.valid);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
